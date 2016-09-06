@@ -13,11 +13,12 @@ defmodule Zendex.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   defp deps do
-    [{:ex_doc, ">= 0.0.0", only: :dev}]
+    [{:ex_doc, ">= 0.0.0", only: :dev},
+     {:httpoison, "~> 0.9"}]
   end
 
   defp description do
