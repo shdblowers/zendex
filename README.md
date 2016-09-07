@@ -1,6 +1,6 @@
-# Zendex
+# Zendex [![Build Status](https://travis-ci.org/shdblowers/zendex.svg?branch=master)](https://travis-ci.org/shdblowers/zendex)
 
-**TODO: Add description**
+An Elixir wrapper for the Zendesk API.
 
 ## Installation
 
