@@ -1,6 +1,6 @@
-# Zendex
+# Zendex [![Build Status](https://travis-ci.org/shdblowers/zendex.svg?branch=master)](https://travis-ci.org/shdblowers/zendex) [![Hex pm](http://img.shields.io/hexpm/v/zendex.svg?style=flat)](https://hex.pm/packages/zendex) [![hex.pm downloads](https://img.shields.io/hexpm/dt/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
 
-**TODO: Add description**
+An Elixir wrapper for the Zendesk API.
 
 ## Installation
 
