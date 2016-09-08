@@ -17,9 +17,10 @@ defmodule Zendex.Mixfile do
   end
 
   defp deps do
-    [{:ex_doc, ">= 0.0.0", only: :dev},
-     {:httpoison, "~> 0.9"},
-     {:poison, "~> 2.2"}]
+    [{:httpoison, "~> 0.9"},
+     {:poison, "~> 2.2"},
+     {:ex_doc, ">= 0.0.0", only: :dev},
+     {:credo, "~> 0.4", only: :dev}]
   end
 
   defp description do
