@@ -1,6 +1,6 @@
 defmodule Zendex.Search do
 
-  @url "/search.json?query="
+  @url "/api/v2/search.json?query="
 
   @http_client Application.get_env(:zendex, :http_client)
 
