@@ -1,4 +1,8 @@
 defmodule Zendex.HttpClient.InMemory do
+  @moduledoc """
+  Allows testing of the Zendex project by mocking out calls to an actual Zendesk
+  API.
+  """
 
   def get!("http://test.zendesk.com/api/v2/tickets.json", [{"Authorization", authentication}]) do
     "ticket"

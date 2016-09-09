@@ -1,4 +1,8 @@
 defmodule Zendex.Connection do
+  @moduledoc """
+  Establishes connection details with Zendex by the user providing a base url,
+  username and password.
+  """
 
   @type t :: %{base_url: String.t, authentication: binary}
 

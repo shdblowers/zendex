@@ -1,10 +1,13 @@
 defmodule Zendex.Search do
+  @moduledoc  """
+  Allows use of the Zendex search API functionality.
+  """
 
   @url "/api/v2/search.json?query="
-
   @http_client Application.get_env(:zendex, :http_client)
 
-  @spec query(Zendex.Connection.t, map, String.t, String.t) :: HTTPoison.Response.t
+  @spec query(Zendex.Connection.t, map, String.t, String.t)
+    :: HTTPoison.Response.t
   def query(connection, query, sort_by \\ "", sort_order \\ "asc") do
     search_string = create_search_string(query)
     sort_string = create_sort_string(sort_by, sort_order)

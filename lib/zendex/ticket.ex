@@ -1,4 +1,8 @@
 defmodule Zendex.Ticket do
+  @moduledoc """
+  Allows interaction with the Zendesk Ticket API, to so things such as creating
+  and listing tickets.
+  """
 
   @url "/api/v2/tickets.json"
 
