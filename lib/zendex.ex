@@ -1,2 +1,0 @@
-defmodule Zendex do
-end
