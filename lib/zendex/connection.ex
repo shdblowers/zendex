@@ -4,6 +4,7 @@ defmodule Zendex.Connection do
   username and password.
   """
 
+  @typedoc "The connection paramters"
   @type t :: %{base_url: String.t, authentication: binary}
 
   @spec set_up(String.t, String.t, String.t) :: t

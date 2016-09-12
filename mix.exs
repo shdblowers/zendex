@@ -9,7 +9,8 @@ defmodule Zendex.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps(),
-     package: package()]
+     package: package(),
+     dialyzer: [plt_add_apps: [:httpoison], plt_add_deps: :transitive]]
   end
 
   def application do

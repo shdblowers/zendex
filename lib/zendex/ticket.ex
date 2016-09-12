@@ -8,12 +8,13 @@ defmodule Zendex.Ticket do
 
   @http_client Application.get_env(:zendex, :http_client)
 
-  @spec list(Zendex.Connection.t) :: String.t
+  @spec list(Zendex.Connection.t) :: HTTPoison.Response.t
   def list(connection) do
     @http_client.get!(connection.base_url <> @url, [{"Authorization",
        "Basic #{connection.authentication}"}])
   end
 
+  @spec create(Zendex.Connection.t, map) :: HTTPoison.Response.t
   def create(connection, ticket) do
     @http_client.post!(connection.base_url <> @url,
       Poison.encode!(ticket),
