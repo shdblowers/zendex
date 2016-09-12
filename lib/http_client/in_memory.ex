@@ -14,8 +14,7 @@ defmodule Zendex.HttpClient.InMemory do
     ["Jimbob Ticket 1", "Jimbob Ticket 2"]
   end
 
-  def post!("http://test.zendesk.com/api/v2/tickets.json",
-            "{\"ticket\": {}}",
-            [{"Authorization", _authentication}, {"Content-Type", "application/json"} ]) do
+  def post!("http://test.zendesk.com/api/v2/tickets.json", "{\"ticket\":{}}", [{"Authorization", _authentication}, {"Content-Type", "application/json"}]) do
+    "Ticket created successfully!"
   end
 end
