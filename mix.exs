@@ -20,7 +20,8 @@ defmodule Zendex.Mixfile do
     [{:httpoison, "~> 0.9"},
      {:poison, "~> 2.2"},
      {:ex_doc, ">= 0.0.0", only: :dev},
-     {:credo, "~> 0.4", only: :dev}]
+     {:credo, "~> 0.4", only: :dev},
+     {:dialyxir, "~> 0.3", only: :dev}]
   end
 
   defp description do
