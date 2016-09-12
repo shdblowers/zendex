@@ -1,4 +1,9 @@
-# Zendex [![Build Status](https://travis-ci.org/shdblowers/zendex.svg?branch=master)](https://travis-ci.org/shdblowers/zendex) [![Coverage Status](https://coveralls.io/repos/github/shdblowers/zendex/badge.svg?branch=master)](https://coveralls.io/github/shdblowers/zendex?branch=master) [![Hex pm](http://img.shields.io/hexpm/v/zendex.svg?style=flat)](https://hex.pm/packages/zendex) [![hex.pm downloads](https://img.shields.io/hexpm/dt/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
+# Zendex
+
+[![Build Status](https://travis-ci.org/shdblowers/zendex.svg?branch=master)](https://travis-ci.org/shdblowers/zendex)
+[![Coverage Status](https://coveralls.io/repos/github/shdblowers/zendex/badge.svg?branch=master)](https://coveralls.io/github/shdblowers/zendex?branch=master)
+[![Hex pm](http://img.shields.io/hexpm/v/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
+[![hex.pm downloads](https://img.shields.io/hexpm/dt/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
 
 An Elixir wrapper for the Zendesk API.
 
