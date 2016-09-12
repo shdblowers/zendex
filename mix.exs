@@ -10,7 +10,9 @@ defmodule Zendex.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps(),
      package: package(),
-     dialyzer: [plt_add_apps: [:httpoison], plt_add_deps: :transitive]]
+     dialyzer: [plt_add_apps: [:httpoison], plt_add_deps: :transitive],
+     test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: ["coveralls": :test, "coveralls.travis": :test]]
   end
 
   def application do
@@ -22,7 +24,8 @@ defmodule Zendex.Mixfile do
      {:poison, "~> 2.2"},
      {:ex_doc, ">= 0.0.0", only: :dev},
      {:credo, "~> 0.4", only: :dev},
-     {:dialyxir, "~> 0.3", only: :dev}]
+     {:dialyxir, "~> 0.3", only: :dev},
+     {:excoveralls, "~> 0.5", only: :test}]
   end
 
   defp description do
