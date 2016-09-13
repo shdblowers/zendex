@@ -4,8 +4,9 @@ defmodule Zendex.Ticket do
   and listing tickets.
   """
 
-  @url "/api/v2/tickets.json"
+  alias Zendex.CommonHelpers
 
+  @url "/api/v2/tickets.json"
   @http_client Application.get_env(:zendex, :http_client)
 
   @spec list(Zendex.Connection.t) :: map
@@ -13,7 +14,7 @@ defmodule Zendex.Ticket do
     connection.base_url
     |> Kernel.<>(@url)
     |> @http_client.get!(headers(connection.authentication))
-    |> decode_response
+    |> CommonHelpers.decode_response
   end
 
   @spec create(Zendex.Connection.t, map) :: map
@@ -23,10 +24,8 @@ defmodule Zendex.Ticket do
                                   headers(connection.authentication) ++
                                     [{"Content-Type", "application/json"}])
 
-    decode_response(response)
+    CommonHelpers.decode_response(response)
   end
-
-  defp decode_response(%{body: body}), do: Poison.decode!(body)
 
   defp headers(authentication) do
     [{"Authorization", "Basic #{authentication}"}]

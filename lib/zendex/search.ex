@@ -1,21 +1,24 @@
 defmodule Zendex.Search do
-  @moduledoc  """
+  @moduledoc """
   Allows use of the Zendex search API functionality.
   """
+
+  alias Zendex.CommonHelpers
 
   @url "/api/v2/search.json?query="
   @http_client Application.get_env(:zendex, :http_client)
 
-  @spec query(Zendex.Connection.t, map, String.t, String.t)
-    :: HTTPoison.Response.t
+  @spec query(Zendex.Connection.t, map, String.t, String.t) :: map
   def query(connection, query, sort_by \\ "", sort_order \\ "desc") do
     search_string = create_search_string(query)
     sort_string = create_sort_string(sort_by, sort_order)
 
     full_uri = connection.base_url <> @url <> search_string <> sort_string
 
-    @http_client.get!(full_uri,
-                      [{"Authorization", "Basic #{connection.authentication}"}])
+    full_uri
+    |> @http_client.get!([{"Authorization",
+                           "Basic #{connection.authentication}"}])
+    |> CommonHelpers.decode_response
   end
 
   defp create_search_string(query) do
