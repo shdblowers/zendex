@@ -10,16 +10,20 @@ defmodule Zendex.Ticket do
 
   @spec list(Zendex.Connection.t) :: HTTPoison.Response.t
   def list(connection) do
-    @http_client.get!(connection.base_url <> @url, [{"Authorization",
-       "Basic #{connection.authentication}"}])
+    full_url = connection.base_url <> @url
+
+    @http_client.get!(full_url, headers(connection.authentication))
   end
 
   @spec create(Zendex.Connection.t, map) :: HTTPoison.Response.t
   def create(connection, ticket) do
     @http_client.post!(connection.base_url <> @url,
-      Poison.encode!(ticket),
-      [{"Authorization", "Basic #{connection.authentication}"},
-       {"Content-Type", "application/json"}])
+                       Poison.encode!(ticket),
+                       headers(connection.authentication) ++
+                         [{"Content-Type", "application/json"}])
   end
 
+  defp headers(authentication) do
+    [{"Authorization", "Basic #{authentication}"}]
+  end
 end
