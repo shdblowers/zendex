@@ -6,7 +6,7 @@ defmodule Zendex.HttpClient.InMemory do
 
   def get!("http://test.zendesk.com/api/v2/tickets.json",
            [{"Authorization", _authentication}]) do
-    "ticket"
+    fake_response("ticket")
   end
 
   def get!("http://test.zendesk.com/api/v2/search.json?query=requester%3AJimbob+type%3Aticket",
@@ -20,6 +20,8 @@ defmodule Zendex.HttpClient.InMemory do
   end
 
   def post!("http://test.zendesk.com/api/v2/tickets.json", "{\"ticket\":{}}", [{"Authorization", _authentication}, {"Content-Type", "application/json"}]) do
-    "Ticket created successfully!"
+    fake_response("Ticket created successfully!")
   end
+
+  defp fake_response(body), do: %{body: Poison.encode!(body)}
 end
