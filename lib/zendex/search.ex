@@ -8,7 +8,7 @@ defmodule Zendex.Search do
 
   @spec query(Zendex.Connection.t, map, String.t, String.t)
     :: HTTPoison.Response.t
-  def query(connection, query, sort_by \\ "", sort_order \\ "asc") do
+  def query(connection, query, sort_by \\ "", sort_order \\ "desc") do
     search_string = create_search_string(query)
     sort_string = create_sort_string(sort_by, sort_order)
 
