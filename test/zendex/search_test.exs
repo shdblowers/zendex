@@ -1,10 +1,28 @@
 defmodule Zendex.SearchTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
-  test "doing a search" do
-   conn = Zendex.Connection.set_up("http://test.zendesk.com", "User", "Pass")
-   assert ["Jimbob Ticket 1", "Jimbob Ticket 2"]
-    == Zendex.Search.query(conn, %{type: "ticket", requester: "Jimbob"})
+  setup do
+    [conn: Zendex.Connection.set_up("http://test.zendesk.com", "User", "Passw")]
+  end
+
+  test "doing a search", context do
+    expected = ["Jimbob Ticket 1", "Jimbob Ticket 2"]
+
+    actual = Zendex.Search.query(context[:conn],
+                                 %{type: "ticket", requester: "Jimbob"})
+
+    assert actual == expected
+  end
+
+  test "doing a search with sorting", context do
+    expected = ["Reginald Ticket 1", "Reginald Ticket 2"]
+
+    actual = Zendex.Search.query(context[:conn],
+                                 %{type: "ticket", requester: "Reginald"},
+                                 "created_at",
+                                 "desc")
+
+    assert actual == expected
   end
 
 end
