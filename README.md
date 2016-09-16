@@ -14,7 +14,7 @@ An Elixir wrapper for the Zendesk API.
 
     ```elixir
     def deps do
-      [{:zendex, "~> 0.5.0"}]
+      [{:zendex, "~> 0.6.0"}]
     end
     ```
 
