@@ -13,7 +13,7 @@ defmodule Zendex.Ticket do
   def list(connection) do
     connection.base_url
     |> Kernel.<>(@url)
-    |> @http_client.get!(headers(connection.authentication))
+    |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
     |> CommonHelpers.decode_response
   end
 
@@ -22,12 +22,8 @@ defmodule Zendex.Ticket do
     connection.base_url
     |> Kernel.<>(@url)
     |> @http_client.post!(Poison.encode!(ticket),
-                          headers(connection.authentication) ++
-                            [{"Content-Type", "application/json"}])
+                          CommonHelpers.get_headers(connection.authentication,
+                                                    %{content_type: :json}))
     |> CommonHelpers.decode_response
-  end
-
-  defp headers(authentication) do
-    [{"Authorization", "Basic #{authentication}"}]
   end
 end

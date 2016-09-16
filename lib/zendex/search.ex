@@ -10,14 +10,14 @@ defmodule Zendex.Search do
 
   @spec query(Zendex.Connection.t, map, String.t, String.t) :: map
   def query(connection, query, sort_by \\ "", sort_order \\ "desc") do
+
     search_string = create_search_string(query)
     sort_string = create_sort_string(sort_by, sort_order)
 
     full_uri = connection.base_url <> @url <> search_string <> sort_string
 
     full_uri
-    |> @http_client.get!([{"Authorization",
-                           "Basic #{connection.authentication}"}])
+    |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
     |> CommonHelpers.decode_response
   end
 
