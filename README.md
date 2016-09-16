@@ -4,6 +4,7 @@
 [![Hex.pm version](http://img.shields.io/hexpm/v/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
 [![Hex.pm downloads](https://img.shields.io/hexpm/dt/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
 [![Hex.pm license](https://img.shields.io/hexpm/l/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
+[![Libraries.io dependencies](https://img.shields.io/librariesio/release/hex/zendex.svg?style=flat)](https://libraries.io/hex/zendex)
 
 An Elixir wrapper for the Zendesk API.
 
