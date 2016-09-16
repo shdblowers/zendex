@@ -19,12 +19,12 @@ defmodule Zendex.Ticket do
 
   @spec create(Zendex.Connection.t, map) :: map
   def create(connection, ticket) do
-    response = @http_client.post!(connection.base_url <> @url,
-                                  Poison.encode!(ticket),
-                                  headers(connection.authentication) ++
-                                    [{"Content-Type", "application/json"}])
-
-    CommonHelpers.decode_response(response)
+    connection.base_url
+    |> Kernel.<>(@url)
+    |> @http_client.post!(Poison.encode!(ticket),
+                          headers(connection.authentication) ++
+                            [{"Content-Type", "application/json"}])
+    |> CommonHelpers.decode_response
   end
 
   defp headers(authentication) do
