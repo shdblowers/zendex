@@ -8,6 +8,9 @@ defmodule Zendex.Search do
   @url "/api/v2/search.json?query="
   @http_client Application.get_env(:zendex, :http_client)
 
+  @doc """
+  Search Zendesk.
+  """
   @spec query(Zendex.Connection.t, map, String.t, String.t) :: map
   def query(connection, query, sort_by \\ "", sort_order \\ "desc") do
 

@@ -9,6 +9,9 @@ defmodule Zendex.Ticket do
   @url "/api/v2/tickets.json"
   @http_client Application.get_env(:zendex, :http_client)
 
+  @doc """
+  List all tickets.
+  """
   @spec list(Zendex.Connection.t) :: map
   def list(connection) do
     connection.base_url
@@ -17,6 +20,9 @@ defmodule Zendex.Ticket do
     |> CommonHelpers.decode_response
   end
 
+  @doc """
+  Create a new ticket.
+  """
   @spec create(Zendex.Connection.t, map) :: map
   def create(connection, ticket) do
     connection.base_url
