@@ -10,6 +10,7 @@ defmodule Zendex.TicketTest do
   end
 
   test "creating a ticket", context do
-    assert "Ticket created successfully!"  == Zendex.Ticket.create(context[:conn], %{"ticket": %{}})
+    assert "Ticket created successfully!" ==
+      Zendex.Ticket.create(context[:conn], %{"ticket": %{}})
   end
 end
