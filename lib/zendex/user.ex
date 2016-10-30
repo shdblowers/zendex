@@ -29,6 +29,18 @@ defmodule Zendex.User do
   end
 
   @doc """
+  Show many user, given their ids.
+  """
+  @spec show_many(Zendex.Connection.t, [integer]) :: map
+  def show_many(connection, ids) do
+    ids = Enum.join(ids, ",")
+
+    "#{connection.base_url}#{@url}/show_many.json?ids=#{ids}"
+    |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
+    |> CommonHelpers.decode_response
+  end
+
+  @doc """
   Create a new user.
   """
   @spec create(Zendex.Connection.t, map) :: map
