@@ -13,8 +13,7 @@ defmodule Zendex.User do
   """
   @spec list(Zendex.Connection.t) :: map
   def list(connection) do
-    connection.base_url
-    |> Kernel.<>("#{@url}.json")
+    "#{connection.base_url}#{@url}.json"
     |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
     |> CommonHelpers.decode_response
   end
@@ -24,8 +23,7 @@ defmodule Zendex.User do
   """
   @spec show(Zendex.Connection.t, integer) :: map
   def show(connection, id) do
-    connection.base_url
-    |> Kernel.<>("#{@url}/#{id}.json")
+    "#{connection.base_url}#{@url}/#{id}.json"
     |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
     |> CommonHelpers.decode_response
   end
@@ -35,8 +33,7 @@ defmodule Zendex.User do
   """
   @spec create(Zendex.Connection.t, map) :: map
   def create(connection, user) do
-    connection.base_url
-    |> Kernel.<>("#{@url}.json")
+    "#{connection.base_url}#{@url}.json"
     |> @http_client.post!(Poison.encode!(user),
                           CommonHelpers.get_headers(connection.authentication,
                                                     %{content_type: :json}))
