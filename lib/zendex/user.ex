@@ -5,13 +5,23 @@ defmodule Zendex.User do
 
   alias Zendex.CommonHelpers
 
-  @url "/api/v2/users.json"
+  @url "/api/v2/users"
   @http_client Application.get_env(:zendex, :http_client)
 
   @spec list(Zendex.Connection.t) :: map
   def list(connection) do
     connection.base_url
     |> Kernel.<>(@url)
+    |> Kernel.<>(".json")
+    |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
+    |> CommonHelpers.decode_response
+  end
+
+  @spec show(Zendex.Connection.t, integer) :: map
+  def show(connection, id) do
+    connection.base_url
+    |> Kernel.<>(@url)
+    |> Kernel.<>("/#{id}.json")
     |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
     |> CommonHelpers.decode_response
   end
@@ -20,6 +30,7 @@ defmodule Zendex.User do
   def create(connection, user) do
     connection.base_url
     |> Kernel.<>(@url)
+    |> Kernel.<>(".json")
     |> @http_client.post!(Poison.encode!(user),
                           CommonHelpers.get_headers(connection.authentication,
                                                     %{content_type: :json}))

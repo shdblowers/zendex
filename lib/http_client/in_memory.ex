@@ -26,6 +26,11 @@ defmodule Zendex.HttpClient.InMemory do
     fake_response("users")
   end
 
+  def get!("#{@base_url}/api/v2/users/87.json",
+           [{"Authorization", _authentication}]) do
+    fake_response(%{"user": %{"id": 87, "name": "Quim Stroud"}})
+  end
+
   def post!(@base_url <> "/api/v2/tickets.json",
             "{\"ticket\":{}}",
             [{"Authorization", _authentication}, {"Content-Type", "application/json"}]) do

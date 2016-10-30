@@ -12,6 +12,13 @@ defmodule Zendex.UserTest do
     assert expected == actual
   end
 
+  test "showing a user", context do
+    expected = %{"user" => %{"id" => 87, "name" => "Quim Stroud"}}
+    actual = Zendex.User.show(context[:conn], 87)
+
+    assert expected == actual
+  end
+
   test "creating a user", context do
     expected = %{"user" => %{"id" => 1234, "name" => "Roger", "email" => "roger@dodger.com"}}
     actual = Zendex.User.create(context[:conn], %{user: %{name: "Roger", email: "roger@dodger.com"}})
