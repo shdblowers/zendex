@@ -2,7 +2,7 @@ defmodule Zendex.UserTest do
   use ExUnit.Case, async: true
 
   setup do
-    [conn: Zendex.Connection.set_up("http://test.zendesk.com", "User1", "pass")]
+    [conn: Zendex.Connection.setup("http://test.zendesk.com", "User1", "pass")]
   end
 
   test "list users", context do

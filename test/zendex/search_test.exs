@@ -2,7 +2,7 @@ defmodule Zendex.SearchTest do
   use ExUnit.Case, async: true
 
   setup do
-    [conn: Zendex.Connection.set_up("http://test.zendesk.com", "User", "Passw")]
+    [conn: Zendex.Connection.setup("http://test.zendesk.com", "User", "Passw")]
   end
 
   test "doing a search", context do
