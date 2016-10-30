@@ -14,10 +14,7 @@ defmodule Zendex.Search do
     search_string = create_search_string(query)
     sort_string = create_sort_string(sort_by, sort_order)
 
-    connection.base_url
-    |> Kernel.<>(@url)
-    |> Kernel.<>(search_string)
-    |> Kernel.<>(sort_string)
+    "#{connection.base_url}#{@url}#{search_string}#{sort_string}"
     |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
     |> CommonHelpers.decode_response
   end
