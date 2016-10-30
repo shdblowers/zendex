@@ -8,6 +8,9 @@ defmodule Zendex.User do
   @url "/api/v2/users"
   @http_client Application.get_env(:zendex, :http_client)
 
+  @doc """
+  List all users.
+  """
   @spec list(Zendex.Connection.t) :: map
   def list(connection) do
     connection.base_url
@@ -16,6 +19,9 @@ defmodule Zendex.User do
     |> CommonHelpers.decode_response
   end
 
+  @doc """
+  Show a specific user, given their id.
+  """
   @spec show(Zendex.Connection.t, integer) :: map
   def show(connection, id) do
     connection.base_url
@@ -24,6 +30,9 @@ defmodule Zendex.User do
     |> CommonHelpers.decode_response
   end
 
+  @doc """
+  Create a new user.
+  """
   @spec create(Zendex.Connection.t, map) :: map
   def create(connection, user) do
     connection.base_url
