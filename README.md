@@ -25,3 +25,23 @@ An Elixir wrapper for the Zendesk API.
       [applications: [:zendex]]
     end
     ```
+
+## Usage
+
+  1. Setup a `Zendex.Connection` map, that will store your Zendesk details. It requires the URL of your Zendesk instance, your username and your password.
+
+  ```elixir
+  iex> conn = Zendex.Connection.set_up("http://test.zendesk.com", "User1", "pass")
+  %{authentication: "VXNlcjE6cGFzcw==", base_url: "http://test.zendesk.com"}
+  ```
+
+  2. Make use of the other modules to do various actions on your Zendesk. Example of showing a user:
+
+  ```elixir
+  iex> Zendex.User.show(conn, 1)
+  %{"user": %{"id": 87, "name": "Quim Stroud", ...}}
+  ```
+
+## Completeness and Contributions
+
+This package far from complete in terms of utilising all of the Zendesk API, any contributions will be welcome. Please keep the code consistent with what I have already written here.
