@@ -7,6 +7,15 @@ defmodule Zendex.Connection do
   @typedoc "The connection paramters"
   @type t :: %{base_url: String.t, authentication: binary}
 
+  @doc """
+  Setup connection details with your Zendesk.
+
+  ## Examples
+
+      iex> Zendex.Connection.setup("http://example.zendesk.com", "ZendeskUser", "Password1")
+      %{authentication: "WmVuZGVza1VzZXI6UGFzc3dvcmQx", base_url: "http://example.zendesk.com"}
+
+  """
   @spec setup(String.t, String.t, String.t) :: t
   def setup(base_url, username, password) do
     authentication = Base.encode64("#{username}:#{password}")

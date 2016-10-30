@@ -1,6 +1,8 @@
 defmodule Zendex.ConnectionTest do
   use ExUnit.Case, async: true
 
+  doctest Zendex.Connection
+
   test "setup encodes username and password correctly" do
     expected = %{authentication: "WHhYQXdlc29tZVVzZXJuYW1lWHhYOnBhc3N3b3JkMTIz",
                  base_url: ""}
