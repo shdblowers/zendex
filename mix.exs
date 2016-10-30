@@ -3,6 +3,7 @@ defmodule Zendex.Mixfile do
 
   def project do
     [app: :zendex,
+     source_url: "https://github.com/shdblowers/zendex",
      version: "0.6.0",
      elixir: "~> 1.3",
      description: description(),
@@ -12,7 +13,8 @@ defmodule Zendex.Mixfile do
      package: package(),
      dialyzer: [plt_add_apps: [:httpoison], plt_add_deps: :transitive],
      test_coverage: [tool: ExCoveralls],
-     preferred_cli_env: ["coveralls": :test, "coveralls.travis": :test]]
+     preferred_cli_env: ["coveralls": :test, "coveralls.travis": :test],
+     docs: [extras: ["README.md"]]]
   end
 
   def application do
