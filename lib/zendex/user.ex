@@ -81,6 +81,26 @@ defmodule Zendex.User do
     |> CommonHelpers.decode_response
   end
 
+  @doc """
+  Show information relating to the user, example: number of assigned tickets.
+
+  ## Examples
+
+      iex> conn = Zendex.Connection.setup("http://test.zendesk.com", "ZendeskUser", "Password1")
+      %{authentication: "WmVuZGVza1VzZXI6UGFzc3dvcmQx", base_url: "http://test.zendesk.com"}
+      iex> Zendex.User.related_information(conn, 649267)
+      %{"user_related" => %{"assigned_tickets" => 12,
+                            "ccd_tickets" => 5,
+                            "entry_subscriptions" => 1,
+                            "forum_subscriptions" => 3,
+                            "organization_subscriptions" => 1,
+                            "requested_tickets" => 7,
+                            "subscriptions" => 6,
+                            "topic_comments" => 116,
+                            "topics" => 5,
+                            "votes" => 2001}}
+
+  """
   @spec related_information(Zendex.Connection.t, integer) :: map
   def related_information(connection, id) do
     "#{connection.base_url}#{@url}/#{id}/related.json"
