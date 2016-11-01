@@ -68,4 +68,44 @@ defmodule Zendex.UserTest do
 
     assert expected == actual
   end
+
+  test "deleting a user", context do
+    expected = %{"user" => %{"ticket_restriction" => nil,
+                             "chat_only" => false,
+                             "shared_phone_number" => nil,
+                             "notes" => "",
+                             "phone" => nil,
+                             "organization_id" => 149043,
+                             "last_login_at" => "2016-10-28T21:08:23Z",
+                             "moderator" => true,
+                             "shared" => false,
+                             "id" => 49043,
+                             "role" => "admin",
+                             "external_id" => nil,
+                             "shared_agent" => false,
+                             "photo" => nil,
+                             "verified" => true,
+                             "active" => false,
+                             "locale_id" => 1,
+                             "suspended" => false,
+                             "created_at" => "2015-05-28T09:12:45Z",
+                             "name" => "Rian Hawkins",
+                             "restricted_agent" => false,
+                             "locale" => "en-US",
+                             "details" => "",
+                             "alias" => nil,
+                             "url" => "https://test.zendesk.com/api/v2/users/49043.json",
+                             "custom_role_id" => nil,
+                             "email" => "rian.hawkins@test.com",
+                             "signature" => nil,
+                             "two_factor_auth_enabled" => nil,
+                             "time_zone" => "London",
+                             "only_private_comments" => false,
+                             "user_fields" => %{"customer_complaint" => nil},
+                             "tags" => [],
+                             "updated_at" => "2016-10-28T21:08:23Z"}}
+    actual = Zendex.User.delete(context[:conn], 49043)
+
+    assert expected == actual
+  end
 end

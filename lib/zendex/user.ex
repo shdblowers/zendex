@@ -75,4 +75,14 @@ defmodule Zendex.User do
     |> CommonHelpers.decode_response
   end
 
+  @doc """
+  Delete a user.
+  """
+  @spec show(Zendex.Connection.t, integer) :: map
+  def delete(connection, id) do
+    "#{connection.base_url}#{@url}/#{id}.json"
+    |> @http_client.delete!(CommonHelpers.get_headers(connection.authentication))
+    |> CommonHelpers.decode_response
+  end
+
 end
