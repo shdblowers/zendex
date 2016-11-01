@@ -62,6 +62,20 @@ defmodule Zendex.UserTest do
     assert expected == actual
   end
 
+  test "getting related info on a user", context do
+    expected = %{"user_related" => %{"assigned_tickets" => 12,
+                                     "ccd_tickets" => 5,
+                                     "entry_subscriptions" => 1,
+                                     "forum_subscriptions" => 3,
+                                     "organization_subscriptions" => 1,
+                                     "requested_tickets" => 7,
+                                     "subscriptions" => 6,
+                                     "topic_comments" => 116,
+                                     "topics" => 5,
+                                     "votes" => 2001}}
+    actual = Zendex.User.related_information(context[:conn], 649267)
+  end
+
   test "creating a user", context do
     expected = %{"user" => %{"id" => 1234, "name" => "Roger", "email" => "roger@dodger.com"}}
     actual = Zendex.User.create(context[:conn], %{user: %{name: "Roger", email: "roger@dodger.com"}})

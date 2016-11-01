@@ -81,6 +81,13 @@ defmodule Zendex.User do
     |> CommonHelpers.decode_response
   end
 
+  @spec related_information(Zendex.Connection.t, integer) :: map
+  def related_information(connection, id) do
+    "#{connection.base_url}#{@url}/#{id}/related.json"
+    |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
+    |> CommonHelpers.decode_response
+  end
+
   @doc """
   Create a new user.
   """

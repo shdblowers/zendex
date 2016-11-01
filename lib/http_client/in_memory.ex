@@ -70,6 +70,20 @@ defmodule Zendex.HttpClient.InMemory do
                             %{id: 67, name: "Sarpedon Baumgartner"}]})
   end
 
+  def get!("#{@base_url}/api/v2/users/649267/related.json",
+           [{"Authorization", _authentication}]) do
+    fake_response(%{"user_related" => %{"assigned_tickets" => 12,
+                                        "ccd_tickets" => 5,
+                                        "entry_subscriptions" => 1,
+                                        "forum_subscriptions" => 3,
+                                        "organization_subscriptions" => 1,
+                                        "requested_tickets" => 7,
+                                        "subscriptions" => 6,
+                                        "topic_comments" => 116,
+                                        "topics" => 5,
+                                        "votes" => 2001}})
+  end
+
   def post!(@base_url <> "/api/v2/tickets.json",
             "{\"ticket\":{}}",
             [{"Authorization", _authentication}, {"Content-Type", "application/json"}]) do
