@@ -8,6 +8,8 @@
 
 An Elixir wrapper for the Zendesk API.
 
+[ExDoc Documentation](https://hexdocs.pm/zendex)  
+
 ## Installation
 
   1. Add `zendex` to your list of dependencies in `mix.exs`:
