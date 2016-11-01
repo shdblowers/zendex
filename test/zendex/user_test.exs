@@ -1,6 +1,8 @@
 defmodule Zendex.UserTest do
   use ExUnit.Case, async: true
 
+  doctest Zendex.User
+
   setup do
     [conn: Zendex.Connection.setup("http://test.zendesk.com", "User1", "pass")]
   end
