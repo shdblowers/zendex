@@ -27,7 +27,8 @@ defmodule Zendex.Mixfile do
      {:ex_doc, ">= 0.0.0", only: :dev},
      {:credo, "~> 0.4", only: :dev},
      {:dialyxir, "~> 0.3", only: :dev},
-     {:excoveralls, "~> 0.5", only: :test}]
+     {:excoveralls, "~> 0.5", only: :test},
+     {:meck, "~> 0.8", only: :test}]
   end
 
   defp description do
