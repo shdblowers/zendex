@@ -1,16 +1,18 @@
 defmodule Zendex.TicketTest do
   use ExUnit.Case, async: true
 
+  alias Zendex.Connection
+
   setup do
-    [conn: Zendex.Connection.setup("http://test.zendesk.com", "User", "Passw")]
+    {:ok, conn: Connection.setup("http://test.zendesk.com", "User", "Passw")}
   end
 
-  test "getting tickets", context do
-   assert "ticket" == Zendex.Ticket.list(context[:conn])
+  test "getting tickets", %{conn: conn} do
+    assert "ticket" == Zendex.Ticket.list(conn)
   end
 
-  test "creating a ticket", context do
+  test "creating a ticket", %{conn: conn} do
     assert "Ticket created successfully!" ==
-      Zendex.Ticket.create(context[:conn], %{"ticket": %{}})
+      Zendex.Ticket.create(conn, %{"ticket": %{}})
   end
 end
