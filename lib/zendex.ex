@@ -38,15 +38,6 @@ defmodule Zendex do
     resp
   end
 
-  def patch(path, connection, body \\ "") do
-    _request(:patch, url(connection, path), connection.authentication, body)
-  end
-
-  def patch!(path, connection, body \\ "") do
-    {_, resp} = patch(path, connection, body)
-    resp
-  end
-
   @doc """
   Underlying utility retrieval function
 
@@ -66,8 +57,14 @@ defmodule Zendex do
     {auth, _} = Map.split(connection, [:authentication])
 
     case pagination(options) do
-      nil -> request_stream(:get, url, auth, "", :one_page)
-      :none -> request_stream(:get, url, auth, "", :one_page)
+      nil ->
+        :get
+        |> request_stream(url, auth, "", :one_page)
+        |> realize_if_needed
+      :none ->
+        :get
+        |> request_stream(url, auth, "", :one_page)
+        |> realize_if_needed
       :auto ->
         :get
         |> request_stream(url, auth)

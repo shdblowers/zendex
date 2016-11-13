@@ -1,19 +1,35 @@
 defmodule Zendex.UserTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   doctest Zendex.User
 
+  @cassette_dir "test/fixtures/vcr_cassettes/users"
+
   alias Zendex.Connection
+
+  setup_all do
+    ExVCR.Config.cassette_library_dir(@cassette_dir)
+    HTTPoison.start
+  end
 
   setup do
     {:ok, conn: Connection.setup("https://test.zendesk.com", "User1", "pass")}
   end
 
   test "list users", %{conn: conn} do
-    expected = "users"
-    actual = Zendex.User.list(conn)
+    expected = %{"count" => 4,
+                 "next_page" => nil,
+                 "previous_page" => nil,
+                 "users" => [%{"id" => 1},
+                             %{"id" => 2},
+                             %{"id" => 3},
+                             %{"id" => 4}]}
+    use_cassette "list_users" do
+      actual = Zendex.User.list(conn)
 
-    assert expected == actual
+      assert expected == actual
+    end
   end
 
   test "showing a user", %{conn: conn} do
@@ -51,17 +67,21 @@ defmodule Zendex.UserTest do
                              "user_fields" => %{"customer_complaint" => nil},
                              "tags" => [],
                              "updated_at" => "2016-10-28T21:08:23Z"}}
-    actual = Zendex.User.show(conn, 295204)
 
-    assert expected == actual
+    use_cassette "show_user" do
+      actual = Zendex.User.show(conn, 295204)
+      assert expected == actual
+    end
   end
 
   test "showing many users", %{conn: conn} do
     expected = %{"users" => [%{"id" => 6, "name" => "Kiki Segal"},
                              %{"id" => 67, "name" => "Sarpedon Baumgartner"}]}
-    actual = Zendex.User.show_many(conn, [6,67])
+    use_cassette "show_many_users" do
+      actual = Zendex.User.show_many(conn, [6,67])
 
-    assert expected == actual
+      assert expected == actual
+    end
   end
 
   test "getting related info on a user", %{conn: conn} do
@@ -75,16 +95,20 @@ defmodule Zendex.UserTest do
                                      "topic_comments" => 116,
                                      "topics" => 5,
                                      "votes" => 2001}}
-    actual = Zendex.User.related_information(conn, 649267)
+    use_cassette "related_information" do
+      actual = Zendex.User.related_information(conn, 649267)
 
-    assert expected == actual
+      assert expected == actual
+    end
   end
 
   test "creating a user", %{conn: conn} do
     expected = %{"user" => %{"id" => 1234, "name" => "Roger", "email" => "roger@dodger.com"}}
-    actual = Zendex.User.create(conn, %{user: %{name: "Roger", email: "roger@dodger.com"}})
+    use_cassette "create_user" do
+      actual = Zendex.User.create(conn, %{user: %{name: "Roger", email: "roger@dodger.com"}})
 
-    assert expected == actual
+      assert expected == actual
+    end
   end
 
   test "deleting a user", %{conn: conn} do
@@ -122,8 +146,11 @@ defmodule Zendex.UserTest do
                              "user_fields" => %{"customer_complaint" => nil},
                              "tags" => [],
                              "updated_at" => "2016-10-28T21:08:23Z"}}
-    actual = Zendex.User.delete(conn, 49043)
 
-    assert expected == actual
+    use_cassette "delete_user" do
+      actual = Zendex.User.delete(conn, 49043)
+
+      assert expected == actual
+    end
   end
 end
