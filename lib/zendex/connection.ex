@@ -4,6 +4,8 @@ defmodule Zendex.Connection do
   username and password.
   """
 
+  @typedoc "The Authorization Header"
+  @type auth :: %{authentication: binary}
   @typedoc "The connection paramters"
   @type t :: %{base_url: String.t, authentication: binary}
 

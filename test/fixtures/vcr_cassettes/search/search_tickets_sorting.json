@@ -1,0 +1,37 @@
+
+[
+  {
+    "request": {
+      "body": "\"\\\"\\\"\"",
+      "headers": {
+        "user-agent": "zendex",
+        "Authorization": "Basic VXNlcjE6cGFzcw=="
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://test.zendesk.com/api/v2/search.json?query=requester%3AReginald+type%3Aticket&sort_by=created_at&sort_order=desc"
+    },
+    "response": {
+      "body": "{\"results\":[{\"id\":1,\"description\":\"Reginald Ticket 1\"},{\"id\":2,\"description\":\"Reginald Ticket 2\"}],\"previous_page\":null,\"next_page\":null,\"facets\":null,\"count\":2}",
+      "headers": {
+        "Server": "nginx",
+        "Date": "Fri, 11 Nov 2016 22:02:31 GMT",
+        "Content-Type": "application/json; charset=UTF-8",
+        "Content-Length": "37",
+        "Connection": "keep-alive",
+        "Cache-Control": "private",
+        "WWW-Authenticate": "Basic realm=\"Web Password\"",
+        "Strict-Transport-Security": "max-age=31536000;",
+        "X-UA-Compatible": "IE=Edge,chrome=1",
+        "X-Zendesk-Origin-Server": "app20.pod3.dub1.zdsys.com",
+        "X-Request-Id": "55485721-bf68-44d1-c44b-b8ca3a6bdb18",
+        "X-Runtime": "0.097079",
+        "X-Rack-Cache": "miss",
+        "X-Zendesk-Request-Id": "0c2d369029535cc8a910"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

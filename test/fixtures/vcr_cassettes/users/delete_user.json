@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "\"\\\"\\\"\"",
+      "headers": {
+        "user-agent": "zendex",
+        "Authorization": "Basic VXNlcjE6cGFzcw=="
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "https://test.zendesk.com/api/v2/users/49043.json"
+    },
+    "response": {
+      "body": "{\"user\":{\"updated_at\":\"2016-10-28T21:08:23Z\",\"tags\":[],\"user_fields\":{\"customer_complaint\":null},\"only_private_comments\":false,\"time_zone\":\"London\",\"two_factor_auth_enabled\":null,\"signature\":null,\"email\":\"rian.hawkins@test.com\",\"custom_role_id\":null,\"url\":\"https://test.zendesk.com/api/v2/users/49043.json\",\"alias\":null,\"details\":\"\",\"locale\":\"en-US\",\"restricted_agent\":false,\"name\":\"Rian Hawkins\",\"created_at\":\"2015-05-28T09:12:45Z\",\"suspended\":false,\"locale_id\":1,\"active\":false,\"verified\":true,\"photo\":null,\"shared_agent\":false,\"external_id\":null,\"role\":\"admin\",\"id\":49043,\"shared\":false,\"moderator\":true,\"last_login_at\":\"2016-10-28T21:08:23Z\",\"organization_id\":149043,\"phone\":null,\"notes\":\"\",\"shared_phone_number\":null,\"chat_only\":false,\"ticket_restriction\":null}}",
+      "headers": {
+        "Server": "nginx",
+        "Date": "Fri, 11 Nov 2016 22:02:31 GMT",
+        "Content-Type": "application/json; charset=UTF-8",
+        "Content-Length": "37",
+        "Connection": "keep-alive",
+        "Cache-Control": "private",
+        "WWW-Authenticate": "Basic realm=\"Web Password\"",
+        "Strict-Transport-Security": "max-age=31536000;",
+        "X-UA-Compatible": "IE=Edge,chrome=1",
+        "X-Zendesk-Origin-Server": "app20.pod3.dub1.zdsys.com",
+        "X-Request-Id": "55485721-bf68-44d1-c44b-b8ca3a6bdb18",
+        "X-Runtime": "0.097079",
+        "X-Rack-Cache": "miss",
+        "X-Zendesk-Request-Id": "0c2d369029535cc8a910"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -4,30 +4,23 @@ defmodule Zendex.Ticket do
   and listing tickets.
   """
 
-  alias Zendex.CommonHelpers
-
   @url "/api/v2/tickets.json"
-  @http_client Application.get_env(:zendex, :http_client)
 
   @doc """
   List all tickets.
   """
-  @spec list(Zendex.Connection.t) :: map
-  def list(connection) do
-    "#{connection.base_url}#{@url}"
-    |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
-    |> CommonHelpers.decode_response
+  @spec list(Zendex.Connection.t, Keyword.t) :: [any] | {integer, any}
+  def list(connection, opts \\ []) do
+    "#{@url}"
+    |> Zendex.get!(connection, [], opts)
   end
 
   @doc """
   Create a new ticket.
   """
-  @spec create(Zendex.Connection.t, map) :: map
+  @spec create(Zendex.Connection.t, map) :: any
   def create(connection, ticket) do
-    "#{connection.base_url}#{@url}"
-    |> @http_client.post!(Poison.encode!(ticket),
-                          CommonHelpers.get_headers(connection.authentication,
-                                                    %{content_type: :json}))
-    |> CommonHelpers.decode_response
+    "#{@url}"
+    |> Zendex.post!(connection, Poison.encode!(ticket))
   end
 end
