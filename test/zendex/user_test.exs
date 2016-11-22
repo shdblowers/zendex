@@ -1,20 +1,32 @@
 defmodule Zendex.UserTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
 
-  doctest Zendex.User
+  @base_url "http://test.zendesk.com"
 
   setup do
-    [conn: Zendex.Connection.setup("http://test.zendesk.com", "User1", "pass")]
+    %{conn: Zendex.Connection.setup("http://test.zendesk.com", "User", "Passw")}
   end
 
-  test "list users", context do
+  setup_all do
+    :meck.new(HTTPoison)
+    on_exit fn -> :meck.unload end
+    :ok
+  end
+
+  test "list users", %{conn: conn} do
     expected = "users"
-    actual = Zendex.User.list(context[:conn])
+
+    stub = fn("#{@base_url}/api/v2/users.json", _) ->
+      %HTTPoison.Response{body: Poison.encode!(expected)}
+    end
+    :meck.expect(HTTPoison, :get!, stub)
+
+    actual = Zendex.User.list(conn)
 
     assert expected == actual
   end
 
-  test "showing a user", context do
+  test "showing a user", %{conn: conn} do
     expected = %{"user" => %{"ticket_restriction" => nil,
                              "chat_only" => false,
                              "shared_phone_number" => nil,
@@ -49,20 +61,32 @@ defmodule Zendex.UserTest do
                              "user_fields" => %{"customer_complaint" => nil},
                              "tags" => [],
                              "updated_at" => "2016-10-28T21:08:23Z"}}
-    actual = Zendex.User.show(context[:conn], 295204)
+
+    stub = fn("#{@base_url}/api/v2/users/295204.json", _) ->
+     %HTTPoison.Response{body: Poison.encode!(expected)}
+    end
+    :meck.expect(HTTPoison, :get!, stub)
+
+    actual = Zendex.User.show(conn, 295204)
 
     assert expected == actual
   end
 
-  test "showing many users", context do
+  test "showing many users", %{conn: conn} do
     expected = %{"users" => [%{"id" => 6, "name" => "Kiki Segal"},
                              %{"id" => 67, "name" => "Sarpedon Baumgartner"}]}
-    actual = Zendex.User.show_many(context[:conn], [6,67])
+
+    stub = fn("#{@base_url}/api/v2/users/show_many.json?ids=6,67", _) ->
+    %HTTPoison.Response{body: Poison.encode!(expected)}
+    end
+    :meck.expect(HTTPoison, :get!, stub)
+
+    actual = Zendex.User.show_many(conn, [6,67])
 
     assert expected == actual
   end
 
-  test "getting related info on a user", context do
+  test "getting related info on a user", %{conn: conn} do
     expected = %{"user_related" => %{"assigned_tickets" => 12,
                                      "ccd_tickets" => 5,
                                      "entry_subscriptions" => 1,
@@ -73,19 +97,32 @@ defmodule Zendex.UserTest do
                                      "topic_comments" => 116,
                                      "topics" => 5,
                                      "votes" => 2001}}
-    actual = Zendex.User.related_information(context[:conn], 649267)
+
+    stub = fn("#{@base_url}/api/v2/users/649267/related.json", _) ->
+    %HTTPoison.Response{body: Poison.encode!(expected)}
+    end
+    :meck.expect(HTTPoison, :get!, stub)
+
+    actual = Zendex.User.related_information(conn, 649267)
 
     assert expected == actual
   end
 
-  test "creating a user", context do
+  test "creating a user", %{conn: conn} do
     expected = %{"user" => %{"id" => 1234, "name" => "Roger", "email" => "roger@dodger.com"}}
-    actual = Zendex.User.create(context[:conn], %{user: %{name: "Roger", email: "roger@dodger.com"}})
+
+    stub = fn("#{@base_url}/api/v2/users.json", _, _) ->
+    %HTTPoison.Response{body: Poison.encode!(expected)}
+    end
+    :meck.expect(HTTPoison, :post!, stub)
+
+
+    actual = Zendex.User.create(conn, %{user: %{name: "Roger", email: "roger@dodger.com"}})
 
     assert expected == actual
   end
 
-  test "deleting a user", context do
+  test "deleting a user", %{conn: conn} do
     expected = %{"user" => %{"ticket_restriction" => nil,
                              "chat_only" => false,
                              "shared_phone_number" => nil,
@@ -120,7 +157,13 @@ defmodule Zendex.UserTest do
                              "user_fields" => %{"customer_complaint" => nil},
                              "tags" => [],
                              "updated_at" => "2016-10-28T21:08:23Z"}}
-    actual = Zendex.User.delete(context[:conn], 49043)
+
+    stub = fn("#{@base_url}/api/v2/users/49043.json", _) ->
+    %HTTPoison.Response{body: Poison.encode!(expected)}
+    end
+    :meck.expect(HTTPoison, :delete!, stub)
+
+    actual = Zendex.User.delete(conn, 49043)
 
     assert expected == actual
   end
