@@ -2,9 +2,7 @@ defmodule Zendex.TicketTest do
   use ExUnit.Case, async: false
 
   setup do
-    %{conn: Zendex.Connection.setup("http://test.zendesk.com",
-                                    "User",
-                                    "Password123!")}
+    %{conn: Zendex.Connection.setup("http://test.zendesk.com", "User", "Passw")}
   end
 
   setup_all do
@@ -14,25 +12,27 @@ defmodule Zendex.TicketTest do
   end
 
   test "getting tickets", %{conn: conn} do
-    stub = fn("http://test.zendesk.com/api/v2/tickets.json",
-              [{"Authorization", "Basic VXNlcjpQYXNzd29yZDEyMyE="}]) ->
-      %HTTPoison.Response{body: Poison.encode!("ticket")}
+    expected = "ticket"
+
+    stub = fn("http://test.zendesk.com/api/v2/tickets.json", _headers) ->
+      %HTTPoison.Response{body: Poison.encode!(expected)}
     end
     :meck.expect(HTTPoison, :get!, stub)
 
-    assert "ticket" == Zendex.Ticket.list(conn)
+    assert expected == Zendex.Ticket.list(conn)
   end
 
   test "creating a ticket", %{conn: conn} do
+    expected = "Ticket created successfully!"
+
     stub = fn("http://test.zendesk.com/api/v2/tickets.json",
               "{\"ticket\":{\"title\":\"HELP!\"}}",
-              [{"Authorization", "Basic VXNlcjpQYXNzd29yZDEyMyE="},
-               {"Content-Type", "application/json"}]) ->
-      %HTTPoison.Response{body: Poison.encode!("Ticket created successfully!")}
+              _headers) ->
+      %HTTPoison.Response{body: Poison.encode!(expected)}
     end
     :meck.expect(HTTPoison, :post!, stub)
 
-    assert "Ticket created successfully!" ==
+    assert expected ==
       Zendex.Ticket.create(conn, %{"ticket": %{"title": "HELP!"}})
   end
 end
