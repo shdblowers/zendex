@@ -74,6 +74,8 @@ defmodule Zendex.UserTest do
                                      "topics" => 5,
                                      "votes" => 2001}}
     actual = Zendex.User.related_information(context[:conn], 649267)
+
+    assert expected == actual
   end
 
   test "creating a user", context do
