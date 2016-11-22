@@ -41,7 +41,7 @@ defmodule Zendex.Mixfile do
     [name: :zendex,
      files: ["lib/zendex", "mix.exs", "README.md", "LICENSE"],
      maintainers: ["Steven Blowers"],
-     licenses: ["Apache 2.0"],
+     licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/shdblowers/zendex"}]
   end
 end

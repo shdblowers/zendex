@@ -8,6 +8,8 @@
 
 An Elixir wrapper for the Zendesk API.
 
+[ExDoc Documentation](https://hexdocs.pm/zendex)  
+
 ## Installation
 
   1. Add `zendex` to your list of dependencies in `mix.exs`:
@@ -40,6 +42,14 @@ An Elixir wrapper for the Zendesk API.
   ```elixir
   iex> Zendex.User.show(conn, 1)
   %{"user": %{"id": 87, "name": "Quim Stroud", ...}}
+  ```
+
+  3. Using pipes:
+
+  ```elixir
+  "http://test.zendesk.com"
+  |> Zendex.Connection.setup("Username1", "password123")
+  |> Zendex.User.show(101)
   ```
 
 ## Completeness and Contributions
