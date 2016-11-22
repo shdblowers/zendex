@@ -4,7 +4,7 @@ defmodule Zendex.Mixfile do
   def project do
     [app: :zendex,
      source_url: "https://github.com/shdblowers/zendex",
-     version: "0.7.1",
+     version: "0.8.1",
      elixir: "~> 1.3",
      description: description(),
      build_embedded: Mix.env == :prod,
