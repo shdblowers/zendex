@@ -6,16 +6,6 @@ defmodule Zendex.HttpClient.InMemory do
 
   @base_url "http://test.zendesk.com"
 
-  def get!(@base_url <> "/api/v2/search.json?query=requester%3AJimbob+type%3Aticket",
-           [{"Authorization", _authentication}]) do
-    fake_response(["Jimbob Ticket 1", "Jimbob Ticket 2"])
-  end
-
-  def get!(@base_url <> "/api/v2/search.json?query=requester%3AReginald+type%3Aticket&sort_by=created_at&sort_order=desc",
-           [{"Authorization", _authentication}]) do
-    fake_response(["Reginald Ticket 1", "Reginald Ticket 2"])
-  end
-
   def get!(@base_url <> "/api/v2/users.json",
            [{"Authorization", _authentication}]) do
     fake_response("users")
