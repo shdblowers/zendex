@@ -6,7 +6,6 @@ defmodule Zendex.Search do
   alias Zendex.CommonHelpers
 
   @url "/api/v2/search.json?query="
-  @http_client Application.get_env(:zendex, :http_client)
 
   @doc """
   Search Zendesk.
@@ -18,7 +17,7 @@ defmodule Zendex.Search do
     sort_string = create_sort_string(sort_by, sort_order)
 
     "#{connection.base_url}#{@url}#{search_string}#{sort_string}"
-    |> @http_client.get!(CommonHelpers.get_headers(connection.authentication))
+    |> HTTPoison.get!(CommonHelpers.get_headers(connection.authentication))
     |> CommonHelpers.decode_response
   end
 
