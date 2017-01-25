@@ -1,6 +1,7 @@
 # Zendex
 [![Build Status](https://travis-ci.org/shdblowers/zendex.svg?branch=master)](https://travis-ci.org/shdblowers/zendex)
 [![Coverage Status](https://coveralls.io/repos/github/shdblowers/zendex/badge.svg?branch=master)](https://coveralls.io/github/shdblowers/zendex?branch=master)
+[![Ebert](https://ebertapp.io/github/shdblowers/zendex.svg)](https://ebertapp.io/github/shdblowers/zendex)
 [![Hex.pm version](http://img.shields.io/hexpm/v/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
 [![Hex.pm downloads](https://img.shields.io/hexpm/dt/zendex.svg?style=flat)](https://hex.pm/packages/zendex)
 [![Hex.pm license](https://img.shields.io/hexpm/l/zendex.svg?style=flat)](https://github.com/shdblowers/zendex/blob/master/LICENSE)
